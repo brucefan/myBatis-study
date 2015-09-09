@@ -29,7 +29,7 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED" >
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://127.0.0.1:3306/myba?autoReconnect=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/myba"/>
                 <property name="username" value="root"/>
                 <property name="password" value="root"/>
                 <property name="poolMaximumActiveConnections" value="50"/>
@@ -38,6 +38,7 @@
     </environments> 
     
     <mappers>
-       <mapper resource="userMapper.xml" />
+       <mapper resource="com/mapper/userMapper.xml" />
+       <mapper resource="com/mapper/UserMixinMapper.xml" />
     </mappers> 
 </configuration>

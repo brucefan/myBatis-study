@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 
 public class BaseTest {
-    private SqlSessionFactory sqlSessionFactory;
+    protected SqlSessionFactory sqlSessionFactory;
 
     @Before
     public void init() throws IOException {
