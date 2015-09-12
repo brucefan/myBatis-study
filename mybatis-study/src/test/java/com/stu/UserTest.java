@@ -30,11 +30,14 @@ public class UserTest extends BaseTest{
 		 SqlSession sqlSession = sqlSessionFactory.openSession(); 
 		 UserMixinMapper userMixinMapper = sqlSession.getMapper(UserMixinMapper.class);
 		 
+		 long start = System.currentTimeMillis();
 		 List<UserMixin> list = userMixinMapper.selectUserMixins();
-		 System.out.println("size ->" + list.size());
+		 long end = System.currentTimeMillis();
+		 System.out.println(end-start);
+		 /*System.out.println("size ->" + list.size());
 		 for(UserMixin um : list) {
 			 System.out.println(um.getUser().getName() +" ---> " + um.getUserqq().getQq());
-		 }
+		 }*/
 		 sqlSession.commit();
 	}
 	
@@ -42,8 +45,10 @@ public class UserTest extends BaseTest{
 	public void usersTest() {
 		 SqlSession sqlSession = sqlSessionFactory.openSession(); 
 		 UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-		 
+		 long start = System.currentTimeMillis();
 		 List<User> users = userMapper.selectUsers();
-		 System.out.println(users.size());
+		 long end = System.currentTimeMillis();
+		 System.out.println(end-start);
+		 //System.out.println(users.size());
 	}
 }

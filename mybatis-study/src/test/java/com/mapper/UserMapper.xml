@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap type="com.entity.User" id="userQQResultMap">
+  	<id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    
+  	<association property="userqq" javaType="com.entity.UserQQ">
+    	<id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="qq" property="qq" jdbcType="VARCHAR" />
+	    <result column="userid" property="userId" jdbcType="INTEGER" />
+    </association>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+  	id,name,age
+  </sql>
+  
+  <sql id="T_Column_List" >
+  	u.id,u.name,u.age,q.id,q.qq,q.userid
+  </sql>
+  
+  <select id="selectUser" resultMap="BaseResultMap" parameterType="com.entity.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from user 
+    where id = 1
+  </select>
+  
+  <select id="selectUsers" resultMap="userQQResultMap" >
+    select 
+    <include refid="T_Column_List" />
+    from user u,user_qq q
+    where u.id = q.userid
+  </select>
+  
+</mapper>

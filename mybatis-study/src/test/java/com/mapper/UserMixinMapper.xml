@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.UserMixinMapper" >
+  <!-- 采用 association只返回最后一条,每个实体需要一个id的主键，只要加了一个mid进去，就可以把所有数据查询出来 -->
+  <resultMap id="BaseResultMap" type="com.entity.UserMixin" >
+  	 <id column="mid" property="mid" jdbcType="INTEGER" />
+    <association property="user" javaType="com.entity.User">
+    	<id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="age" property="age" jdbcType="INTEGER" />
+    </association>
+    <association property="userqq" javaType="com.entity.UserQQ">
+    	<id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="qq" property="qq" jdbcType="VARCHAR" />
+	    <result column="userid" property="userId" jdbcType="INTEGER" />
+    </association>
+   
+  </resultMap>
+  <sql id="User_Column_List" >
+  	user.id as mid,user.id,user.name,user.age,userqq.id,userqq.qq,userqq.userid
+  </sql>
+  
+  <select id="selectUserMixins" resultMap="BaseResultMap" >
+    select 
+    <include refid="User_Column_List" />
+    from user user,user_qq userqq
+    where user.id = userqq.userid
+  </select>
+</mapper>
